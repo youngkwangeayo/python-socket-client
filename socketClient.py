@@ -110,7 +110,7 @@ class BaristaCall :
         print("socketSendForQueue")
         while True:
             if not self.messgeQueue.empty():
-                massege = self.messgeQueue.get()
+                massege = await self.messgeQueue.get()
                 print(f"보낸다! {massege}")
                 await self.socket.send(massege)
             else :
