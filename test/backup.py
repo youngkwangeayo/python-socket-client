@@ -7,7 +7,7 @@ class BaristaCall :
     
     isConnect = False
     socket = None
-    messageQueue = asyncio.Queue()
+    messgeQueue = asyncio.Queue()
 
     def __init__(self, url:str=None) -> None:
         self.socket = None
@@ -26,7 +26,6 @@ class BaristaCall :
         asyncio.set_event_loop(self.socketLoop)
         print("루프셋완료")
         self.socketLoop.run_until_complete(self.start())
-        self.socketLoop.run_forever()
         
 
     async def start(self):
@@ -46,14 +45,14 @@ class BaristaCall :
         else :
             print("연결실패")
     
-    def callRobot(self,data) -> None:
-        asyncio.run_coroutine_threadsafe(self.messageQueue.put(data),self.socketLoop)
-        print(f"메시지가 큐에 추가되었습니다: {data}")
- 
+    def callRobotQuest(self,data) -> None:
+        
+        
+        print(data)
 
-    async def setMessageQueue(self,data) -> None :
+    async def callRobot(self,data) -> None :
         # if dataCheck()
-        await self.messageQueue.put(data)
+        await self.messgeQueue.put(data)
         print(f"메시지가 큐에 추가되었습니다: {data}")
         
     async def connect(self, count:int) -> bool:
@@ -80,7 +79,7 @@ class BaristaCall :
             
         
 
-    async def connectBefore(self, count:int) -> bool:
+    async def connect2(self, count:int) -> bool:
         if self.socket is None :
             self.socket = websockets
         
@@ -125,7 +124,7 @@ class BaristaCall :
         print("socketSendForQueue")
         while True:
             try:
-                message = await self.messageQueue.get()
+                message = await self.messgeQueue.get()
                 await self.socket.send(message)
                 print(f"보낸 메세지 : {message}")
             except websockets.ConnectionClosed:
@@ -142,22 +141,25 @@ class BaristaCall :
 if __name__ == "__main__":
     call = BaristaCall()
     print("실행이?")
-    time.sleep(6)
-    print("콜메인")
-    call.callRobot("반가워!!")
-    time.sleep(3)
-    call.callRobot("니이름??")
-    time.sleep(1)
-    call.callRobot("어쩔??")
     # time.sleep(30)
+    # call.callRobot("반가워!!")
+    # time.sleep(3)
+    # call.callRobot("니이름??")
+    # time.sleep(1)
+    # call.callRobot("어쩔??")
+    # time.sleep(30)
+    # loop = asyncio.get_event_loop()
+    # loop.create_task(call.connect())
+    # loop.close()
+    # asyncio.
+    # threading.Thread(target=theardTest, args=(call,)).start()
+    async def main():
+        await asyncio.sleep(5)
+        await call.callRobot("반가워!!")
+        await asyncio.sleep(3)
+        await call.callRobot("니이름??")
+        await asyncio.sleep(1)
+        await call.callRobot("어쩔??")
 
-    # async def main():
-    #     await asyncio.sleep(5)
-    #     await call.callRobot("반가워!!")
-    #     await asyncio.sleep(3)
-    #     await call.callRobot("니이름??")
-    #     await asyncio.sleep(1)
-    #     await call.callRobot("어쩔??")
-
-    # asyncio.run(main())
+    asyncio.run(main())
     
