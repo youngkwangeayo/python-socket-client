@@ -125,8 +125,9 @@ class BaristaCall :
                     }
                     asyncio.run_coroutine_threadsafe(self.httpRequestQueue.put(sendWating),self.socketLoop)
 
-            except:
-                print("입섹션")
+            except Exception as e:
+                print(f"입섹션 : {e}")
+                pass
     
     async def socketSendForQueue(self) ->None :
         print("socketSendForQueue")
