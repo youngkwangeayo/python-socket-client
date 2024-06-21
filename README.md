@@ -1,12 +1,13 @@
 ## LocakSocket Client
 
 ## `한개의 스레드에서 비동기  멀티테스크 소캣 및 http요청 구현`
->하나의 Thread에서 이벤트 루프를 돌린다.
->하나의 이벤트 루프에서 3가지의 task(업무)를 실행한다.
+# 주요기술 `Thread`, `Task`, `Queue`,`event_loop`,`asyncio` ,`aiohttp`, `async,await`
+>하나의 `Thread`에서 `이벤트 루프`를 돌린다.
+>하나의 이벤트 루프에서 3가지의 `task(업무)`를 실행한다.
 >task는 각각 다른업무를 동작한다.
 > 소캣메세지 받기, 소캣메세지 보내기,  http 요청
 > 소캣메세지 보내기와 http 요청은
-> 소캣메세지 queue와 http요청 queue를 만들어서 각 task의 queue를 가져와 사용한다.
+> 소캣메세지 `queue`와 http요청 queue를 만들어서 각 task의 queue를 가져와 사용한다.
 > 소캣메세지를 받으면 유효성 검사 후 httpQueue에 put 을 시킨다.
 > 
 
