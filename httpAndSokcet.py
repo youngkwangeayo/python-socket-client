@@ -47,7 +47,7 @@ class BaristaCall :
         if con ==True :
             t1 = asyncio.create_task(self.socketReceive())
             t2 = asyncio.create_task(self.socketSendForQueue())
-            t3 = asyncio.create_task(self.signageSendWatingInfo())
+            t3 = asyncio.create_task(self.httpRequestForQueueGet())
             await t1
             await t2
             await t3
@@ -119,7 +119,7 @@ class BaristaCall :
                     if status == "ORDER" and reqData["ACK"] == "ONE": continue
                     reqStatus = self.STATUS.get(status)
                     sendWating = {
-                        "frId" : self.frId,
+                        "frId" : "10107",
                         "command":"Status",
                         "data" : [{"status" : reqStatus, "waitingNumber" : reqData["ORDER_NUMBER"]}]
                     }
@@ -141,7 +141,7 @@ class BaristaCall :
                 self.__init__(url)
                 return
             
-    async def signageSendWatingInfo(self) -> None:
+    async def httpRequestForQueueGet(self) -> None:
         while True:
         
             try :
@@ -168,7 +168,7 @@ class BaristaCall :
 
 
 if __name__ == "__main__":
-    call = BaristaCall(frId="10107")
+    call = BaristaCall()
     print("실행이?")
     time.sleep(6)
     print("콜메인")
