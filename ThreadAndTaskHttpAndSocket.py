@@ -191,6 +191,8 @@ if __name__ == "__main__":
     print("콜메인")
     time.sleep(2)
     call.callRobot("반가워!!")
+    while True:
+        time.sleep(3)
 #     time.sleep(3)
 #     call.callRobot("니이름??")
 #     time.sleep(1)
